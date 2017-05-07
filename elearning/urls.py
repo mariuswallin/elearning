@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from courses.views import my_first_view
+from courses.views import course_detail, course_list
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^(?P<who>.*)/$', my_first_view),
+    url(r'^course_detail/(?P<course_id>\d)/$', course_detail),
+    url(r'^$', course_list),
 ]
