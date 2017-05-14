@@ -1,8 +1,12 @@
+from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse
+from django.db import transaction
+
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from courses.forms import CourseForm
-from courses.models import Course
+from courses.models import Course, Section, UserAnswer, Question
 
 
 def course_detail(request, course_id):
