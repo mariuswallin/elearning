@@ -125,3 +125,5 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'students.User'
+
+LOGIN_REDIRECT_URL = '/'
