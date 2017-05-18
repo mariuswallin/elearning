@@ -2,12 +2,14 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import transaction
 from django.views.generic import CreateView, DetailView, ListView
-
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
+from rest_framework import viewsets
+
 from courses.forms import CourseForm
 from courses.models import Course, Section, UserAnswer, Question
+from courses.serializers import SectionSerializer
 
 
 class CourseDetailView(DetailView):
@@ -96,3 +98,8 @@ def show_results(request, section_id):
         'section': section,
         'score': calculate_score(request.user, section)
     })
+
+
+class SectionViewSet(viewsets.ModelViewSet):
+    queryset = Section.objects.all()
+    serializer_class = SectionSerializer
