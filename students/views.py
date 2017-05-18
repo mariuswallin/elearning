@@ -1,11 +1,18 @@
 from collections import OrderedDict
 
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
 
+from rest_framework import viewsets
+
 from students.models import User
+from students.serializers import UserSerializer
 from courses.models import Course
 from courses.views import calculate_score
+
+
+User = get_user_model()
 
 
 def get_all_scores_for_user(user):
@@ -26,3 +33,8 @@ def student_detail(request):
         'scores': get_all_scores_for_user(student),
         'student': student,
     })
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.order_by('-date_joined')
+    serializer_class = UserSerializer
