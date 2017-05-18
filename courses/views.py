@@ -1,6 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import transaction
+from django.views.generic import CreateView, DetailView, ListView
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -9,18 +10,17 @@ from courses.forms import CourseForm
 from courses.models import Course, Section, UserAnswer, Question
 
 
-def course_detail(request, course_id):
-    course = Course.objects.get(id=course_id)
-    return render(request, 'courses/course_detail.html', {
-        'course': course,
-    })
+class CourseDetailView(DetailView):
+    model = Course
+
+course_detail = CourseDetailView.as_view()
 
 
-def course_list(request):
-    courses = Course.objects.prefetch_related('students')
-    return render(request, 'courses/course_list.html', {
-        'courses': courses,
-    })
+class CourseListView(ListView):
+    model = Course
+    queryset = Course.objects.prefetch_related('students')
+
+course_list = CourseListView.as_view()
 
 
 def course_add(request):
@@ -34,6 +34,13 @@ def course_add(request):
     return render(request, 'courses/course_form.html', {
         'form': form,
     })
+
+
+class CourseAddView(CreateView):
+    model = Course
+    fields = '__all__'
+
+course_add = CourseAddView.as_view()
 
 
 def do_section(request, section_id):
