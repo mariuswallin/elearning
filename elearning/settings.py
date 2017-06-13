@@ -33,7 +33,7 @@ else:
     DEBUG = True
 
 ALLOWED_HOSTS = [
-    'http://fierce-thicket-77196.herokuapp.com/',
+    'fierce-thicket-77196.herokuapp.com',
     'localhost',
 ]
 
