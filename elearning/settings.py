@@ -124,6 +124,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'elearning', 'static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 AUTH_USER_MODEL = 'students.User'
 
