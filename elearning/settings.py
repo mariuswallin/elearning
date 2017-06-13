@@ -31,6 +31,7 @@ else:
 
 ALLOWED_HOSTS = [
     'serene-scrubland-55660.herokuapp.com',
+    'localhost',
 ]
 
 
