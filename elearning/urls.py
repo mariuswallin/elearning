@@ -18,7 +18,7 @@ from django.contrib import admin
 
 from students.views import student_detail
 from courses.views import (course_add, course_detail, course_list,
-                           do_section, do_test)
+                           do_section, do_test, show_results)
 
 
 urlpatterns = [
@@ -28,6 +28,9 @@ urlpatterns = [
     url(r'^course_add/$', course_add, name='course_add'),
     url(r'^section/(?P<section_id>\d+)/$', do_section, name='do_section'),
     url(r'^section/(?P<section_id>\d+)/test/$', do_test, name='do_test'),
+
+    url(r'^section/(?P<section_id>\d+)/results/$', show_results, name='show_results'),
+
     url(r'^student_detail/(?P<student_id>\d+)/$', student_detail,
         name='student_detail'),
     url(r'^$', course_list),
